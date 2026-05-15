@@ -81,8 +81,10 @@ if __name__ == "__main__":
     args = get_args()
     logger = setup_logging(config)
 
-    # Setup Constants — API key from env var takes priority over config.yaml
-    PROXY = config['environment']['proxy']
+    # Setup Constants — env vars take priority over config.yaml
+    PROXY = os.environ.get('LEAD_PROXY', config['environment']['proxy'])
+    if not PROXY:
+        PROXY = None
     api_key = os.environ.get('LEAD_API_KEY') or config['api']['key']
     api_base = os.environ.get('LEAD_API_BASE') or config['api']['base_url']
     API_CFG = {'key': api_key, 'base_url': api_base}

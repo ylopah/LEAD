@@ -194,7 +194,7 @@ def deep_retrieve_by_authorities(query, domains, extracted_docs, keywords, proxy
         try:
             logger.debug(f"Scraping: {url}")
             response = requests.get(url, headers=headers, timeout=timeout,
-                                    proxies={"http": proxy_url, "https": proxy_url})
+                                    proxies={"http": proxy_url, "https": proxy_url} if proxy_url else None)
             response.raise_for_status()
             response.encoding = response.apparent_encoding
 
