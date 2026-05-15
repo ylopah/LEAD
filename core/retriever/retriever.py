@@ -5,7 +5,7 @@ import time
 import traceback
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 
 logger = logging.getLogger("Retriever")
 
