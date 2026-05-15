@@ -175,12 +175,18 @@ if __name__ == "__main__":
                 logger.info(f"Reached doc limit ({len(docs)}), stopping global search.")
                 break
 
-        with open(retrieved_docs_file, "w", encoding="utf-8") as f:
-            json.dump(docs, f, indent=4)
+        if docs:
+            with open(retrieved_docs_file, "w", encoding="utf-8") as f:
+                json.dump(docs, f, indent=4)
+        else:
+            logger.warning("No documents retrieved; cache not saved.")
     else:
         logger.info(f"Loading cached documents: {retrieved_docs_file}")
         with open(retrieved_docs_file, "r", encoding="utf-8") as f:
             docs = json.load(f)
+        if not docs:
+            logger.warning("Cached document file is empty, removing it.")
+            os.remove(retrieved_docs_file)
 
     ############## Part 2: Extract Variable Values for Statistical Analysis ##################
     table_file = f'{target_dir}/processed/{args.dataset}_{args.llm}_extracted_table_data.csv'
@@ -188,8 +194,8 @@ if __name__ == "__main__":
     if not os.path.exists(table_file):
         samples = []
         if not docs:
-            logger.error("No documents available for value extraction.")
-            df = pd.DataFrame(columns=nodes.keys())
+            logger.error("No documents available for value extraction. Check network/proxy settings and retry.")
+            sys.exit(1)
         else:
             for url, doc in tqdm(docs.items(), desc="Extracting Variable States"):
                 # Use LLM to determine if variables are present/active in the document
