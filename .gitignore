@@ -1,0 +1,34 @@
+# API keys — never commit real credentials
+.env
+config.local.yaml
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Cached data (generated at runtime)
+datasets/processed/
+
+# Results (generated at runtime)
+results/plots/
+results/metrics/
+results/all_experiments_summary.csv
+
+# Logs
+log/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

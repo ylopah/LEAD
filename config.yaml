@@ -1,0 +1,16 @@
+# Environment Settings
+environment:
+  proxy: "http://127.0.0.1:7890"
+  log_level: "INFO" # Options: DEBUG, INFO, WARNING, ERROR
+  log_file: "./log/experiment.log"
+
+# API Settings
+api:
+  key: "YOUR_API_KEY_HERE"  # Replace with your actual API key
+  base_url: "https://open.bigmodel.cn/api/paas/v4/"
+
+# Search & Retrieval Settings
+retrieval:
+  max_docs_limit: 60
+  timeout: 5
+  max_new_docs_per_query: 10
