@@ -4,6 +4,7 @@ import argparse
 import itertools
 import pandas as pd
 import numpy as np
+import sys
 import time
 import yaml
 import logging
@@ -85,6 +86,11 @@ if __name__ == "__main__":
     api_key = os.environ.get('LEAD_API_KEY') or config['api']['key']
     api_base = os.environ.get('LEAD_API_BASE') or config['api']['base_url']
     API_CFG = {'key': api_key, 'base_url': api_base}
+
+    if not api_key or api_key in ("YOUR_API_KEY_HERE", "sk-your-api-key"):
+        logger.error("API key not configured. Set LEAD_API_KEY environment variable or update config.yaml.")
+        sys.exit(1)
+
     RETRIEVAL_CFG = config['retrieval']
     target_dir = "./datasets"
 
