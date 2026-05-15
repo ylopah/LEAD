@@ -36,9 +36,14 @@ LEAD/
 ## 🚀 Getting Started
 
 ### 1. Installation
-The system requires Python 3.9+. Install dependencies via `pip`:
+The system requires Python 3.9–3.12 (**3.13 is not yet supported** by causal-learn). Install dependencies via `pip`:
+
 ```bash
+# Standard
 pip install -r requirements.txt
+
+# Users in China: use a mirror for faster downloads
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 ```
 
 ### 2. Configuration
