@@ -358,6 +358,9 @@ if __name__ == "__main__":
         pyd = GraphUtils.to_pydot(predicted_dag.G, labels=var_names)
     elif isinstance(predicted_dag, GeneralGraph):
         pyd = GraphUtils.to_pydot(predicted_dag, labels=var_names)
-    pyd.write_png(plot_filename)
 
-    logger.info(f"Causal graph visualization saved to {plot_filename}")
+    try:
+        pyd.write_png(plot_filename)
+        logger.info(f"Causal graph visualization saved to {plot_filename}")
+    except FileNotFoundError:
+        logger.warning("Graphviz 'dot' not found in PATH. Install from https://graphviz.org/download/")
